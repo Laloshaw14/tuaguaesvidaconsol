@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agua Caribe — Pago y Facturas</title>
+  <meta name="description" content="Paga tu servicio de Agua Caribe y consulta tus facturas de manera rápida y segura." />
+  <style>
+    :root{
+      --bg1:#00b4d8;
+      --bg2:#0077b6;
+      --accent:#00e5a8;
+      --white:#ffffff;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center;padding:32px;
+    }
+    .container{
+      max-width:720px;width:100%;
+      background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      border-radius:18px;
+      padding:36px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.25);
+      backdrop-filter: blur(6px);
+      display:flex;
+      flex-direction:column;
+      gap:28px;
+    }
+
+    /* Logo actualizado */
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+      }
+    }
+
+    .brand{display:flex;align-items:center;gap:12px}
+    h1{margin:12px 0 6px;font-size:28px;letter-spacing:-0.4px}
+    p.lead{margin:0 0 16px;opacity:0.95}
+    ul{margin-top:18px;line-height:1.6;opacity:0.95;padding-left:18px}
+
+    .big-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:12px;
+      padding:14px 18px;border-radius:12px;border:0;
+      font-weight:700;font-size:16px;cursor:pointer;
+      box-shadow:0 8px 20px rgba(2,6,23,0.16);
+      transition:transform .12s ease,box-shadow .12s ease;
+      background: linear-gradient(90deg,var(--accent),#00c2ff);
+      color:#05325a;width:100%;
+    }
+    .big-btn:active{transform:translateY(2px)}
+    .secondary{
+      background:transparent;border:2px solid rgba(255,255,255,0.12);
+      color:var(--white);padding:12px;
+      border-radius:12px;font-weight:600;
+      cursor:pointer;width:100%;
+    }
+    .note{font-size:13px;opacity:0.9;text-align:center}
+    .foot{text-align:center;font-size:13px;opacity:0.9}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.5);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal{width:100%;max-width:520px;background:linear-gradient(180deg,rgba(255,255,255,0.97),#ffffff);color:#04243a;border-radius:12px;padding:22px;box-shadow:0 20px 50px rgba(2,6,23,0.3)}
+    .modal h3{margin:0 0 8px}
+    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+    input[type="text"],input[type="email"]{padding:12px;border-radius:8px;border:1px solid #e6eef2}
+    .close{background:none;border:0;font-weight:700;color:#0b2540;cursor:pointer}
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="title">
+      <div class="brand">
+        <div class="logo">
+          <img src="triplea.png" alt="Logo Agua Caribe" />
+        </div>
+        <div>
+          <div style="font-size:12px;opacity:0.95">Servicio Público</div>
+          <div style="font-size:12px;opacity:0.75">Agua Caribe</div>
+        </div>
+      </div>
+      <h1 id="title">Paga tu servicio de Agua Caribe</h1>
+      <p class="lead">Rápido y seguro — solo tienes dos opciones: pagar o ver tus facturas. Sin pasos innecesarios.</p>
+
+      <ul>
+        <li>Pago en línea con tarjeta o PSE (simulado)</li>
+      </ul>
+    </section>
+
+<a href="" target="_blank" class="big-btn" aria-label="Pagar aquí">💳 Pagar aquí</a>
+
+    <div class="foot">© Agua Caribe — Portal de pagos</div>
+  </main>
+
+  <!-- Modal: Facturas -->
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <h3>Consultar facturas</h3>
+        <button class="close" id="closeModal">✕</button>
+      </div>
+      <p style="margin:0 0 12px">Ingresa tu número de contrato o tu correo para ver las facturas asociadas.</p>
+      <div class="field">
+        <label for="contrato">Número de contrato</label>
+        <input id="contrato" type="text" placeholder="Ej: 1234567890" />
+      </div>
+      <div class="field">
+        <label for="email">O correo electrónico</label>
+        <input id="email" type="email" placeholder="tucorreo@ejemplo.com" />
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="big-btn" id="buscarBtn">🔎 Buscar</button>
+        <button class="secondary" id="cerrarBtn">Cancelar</button>
+      </div>
+      <p style="font-size:13px;margin-top:12px;opacity:0.85">Este es un prototipo: conecta aquí tu API de facturación para mostrar resultados reales.</p>
+    </div>
+  </div>
+
+</body>
+</html>
